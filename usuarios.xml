@@ -1,0 +1,26 @@
+<usuarios>    
+    <usuario>
+        <nombre>Juan Péeeesrez</nombre>
+        <usuario1>juanperez</usuario1>
+        <contraseña>12345aA</contraseña>
+        <rol>A</rol>
+    </usuario>
+    <usuario>
+        <nombre>Ana Gómez</nombre>
+        <usuario1>anagomezB1</usuario1>
+        <contraseña>54321</contraseña>
+        <rol>V</rol>
+    </usuario>
+    <usuario>
+        <nombre>Carlos Díaz</nombre>
+        <usuario1>carlosdiaz</usuario1>
+        <contraseña>qwertyA1</contraseña>
+        <rol>V</rol>
+    </usuario>
+    <usuario>
+        <nombre>María Rodríguez</nombre>
+        <usuario1>mariarodriguez</usuario1>
+        <contraseña>password123C</contraseña>
+        <rol>A</rol>
+    </usuario>
+</usuarios>
