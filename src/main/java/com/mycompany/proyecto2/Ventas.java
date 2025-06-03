@@ -438,7 +438,7 @@ public class Ventas extends javax.swing.JFrame {
         double descuento = Double.parseDouble(jLabel12.getText());
         String tipo = jLabel15.getText();
         if(tipo.equals("%")){        
-        double total3 = (total * cantidad) * (descuento/100);
+        double total3 = (total * cantidad) * (descuento/1000);
         tv.total = (total * cantidad) - total3;
         }else{        
         tv.total = (total * cantidad) - descuento;

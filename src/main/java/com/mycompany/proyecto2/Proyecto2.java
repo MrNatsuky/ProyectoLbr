@@ -5,7 +5,6 @@
 package com.mycompany.proyecto2;
 
 import java.util.ArrayList;
-
 /**
  *
  * @author Emmanuel
