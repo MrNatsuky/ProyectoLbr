@@ -14,9 +14,12 @@ import javax.swing.table.TableModel;
  * @author oem
  */
 public class Ventas extends javax.swing.JFrame {
+
     Usuario usuarioActual;
     Libros libros;
     Cupones cupones;
+    private String uso;
+
     /**
      * Creates new form Ventas
      */
@@ -27,49 +30,50 @@ public class Ventas extends javax.swing.JFrame {
         reTabla2();
         reTabla();
         reTabla3();
-        
+
     }
-    private void reTabla2(){
-        String encabezado[] = {"Titulo","Cantidad","total"};
-        DefaultTableModel t = new DefaultTableModel(encabezado,Venta.dibujo.size());
+
+    private void reTabla2() {
+        String encabezado[] = {"Titulo", "Cantidad", "total"};
+        DefaultTableModel t = new DefaultTableModel(encabezado, Venta.dibujo.size());
         jTable2.setModel(t);
         TableModel tabla = jTable2.getModel();
-        
-        for(int i=0;i < Venta.dibujo.size();i++){
+
+        for (int i = 0; i < Venta.dibujo.size(); i++) {
             TablaVenta v = Venta.dibujo.get(i);
             tabla.setValueAt(v.libro, i, 0);
             tabla.setValueAt(v.cantidad, i, 1);
             tabla.setValueAt(v.total, i, 2);
         }
-   }
-    private void reTabla(){
-        String encabezado[] = {"Titulo","Precio","Cantidad"};
-        DefaultTableModel t = new DefaultTableModel(encabezado,Proyecto2.libros.size());
+    }
+
+    private void reTabla() {
+        String encabezado[] = {"Titulo", "Precio", "Cantidad"};
+        DefaultTableModel t = new DefaultTableModel(encabezado, Proyecto2.libros.size());
         jTable1.setModel(t);
         TableModel tabla = jTable1.getModel();
-        
-        for(int i=0;i < Proyecto2.libros.size();i++){
+
+        for (int i = 0; i < Proyecto2.libros.size(); i++) {
             Libros l = Proyecto2.libros.get(i);
             tabla.setValueAt(l.titulo, i, 0);
             tabla.setValueAt(l.precio, i, 1);
             tabla.setValueAt(l.cantidad, i, 2);
         }
-   }
-    
-    private void reTabla3(){
-        String encabezado[] = {"Codigo","Descuento","Tipo"};
-        DefaultTableModel t = new DefaultTableModel(encabezado,Proyecto2.cupones.size());
+    }
+
+    private void reTabla3() {
+        String encabezado[] = {"Codigo", "Descuento", "Tipo"};
+        DefaultTableModel t = new DefaultTableModel(encabezado, Proyecto2.cupones.size());
         jTable3.setModel(t);
         TableModel tabla = jTable3.getModel();
-        
-        for(int i=0;i < Proyecto2.cupones.size();i++){
+
+        for (int i = 0; i < Proyecto2.cupones.size(); i++) {
             Cupones c = Proyecto2.cupones.get(i);
             tabla.setValueAt(c.codigo, i, 0);
             tabla.setValueAt(c.descuento, i, 1);
             tabla.setValueAt(c.tipo, i, 2);
         }
-   }
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,6 +116,8 @@ public class Ventas extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -233,6 +239,10 @@ public class Ventas extends javax.swing.JFrame {
 
         jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jLabel16.setText("Total Con Cupon:");
+
+        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -297,12 +307,14 @@ public class Ventas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(137, 137, 137)
-                        .addComponent(jButton3)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
-                        .addGap(37, 37, 37))))
+                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16)
+                            .addComponent(jButton5))))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(121, 121, 121)
                 .addComponent(jLabel13)
@@ -374,12 +386,16 @@ public class Ventas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton5)
-                        .addGap(150, 150, 150)
-                        .addComponent(jButton3))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(80, 80, 80)
+                        .addComponent(jButton3)))
                 .addGap(42, 42, 42))
         );
 
@@ -391,133 +407,149 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     if(jTable1.getSelectedRow()>=0){
-         libros = Proyecto2.libros.get(jTable1.getSelectedRow());
-         jTextField1.setText(libros.titulo);
-         String precio1 = String.valueOf(libros.precio);
-         jLabel9.setText(precio1);
+        if (jTable1.getSelectedRow() >= 0) {
+            libros = Proyecto2.libros.get(jTable1.getSelectedRow());
+            jTextField1.setText(libros.titulo);
+            String precio1 = String.valueOf(libros.precio);
+            jLabel9.setText(precio1);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      jTextField1.setText("");
-      jTextField2.setText("");
-      jLabel9.setText("");
-      jTextField4.setText("");
-      jTextField5.setText("");
-      jTextField6.setText("");
-      jLabel15.setText("");
-      jLabel12.setText("");
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jLabel9.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jLabel15.setText("");
+        jLabel12.setText("");
+        jLabel17.setText("");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         if(libros !=null){
-             try{
-        libros.titulo = jTextField1.getText();
-        int cantidad1 = Integer.parseInt(jTextField2.getText());
-        if(cantidad1 <= libros.cantidad){
-        libros.cantidad -= cantidad1;
-        reTabla();
-        JOptionPane.showMessageDialog(this, "Se modifico correctamente");
-        
-        //-------------------------------------------------------
-        TablaVenta tv = new TablaVenta();
-        tv.libro = jTextField1.getText();
-        int cantidad = Integer.parseInt(jTextField2.getText());
-        tv.cantidad = cantidad;        
-        double total = Double.parseDouble(jLabel9.getText());
-        
-        
-        if(jLabel12.getText().isEmpty()){
-        tv.total = total * cantidad;
-        Venta.dibujo.add(tv);
-        }
-        
-        
-        else{
-        double descuento = Double.parseDouble(jLabel12.getText());
-        String tipo = jLabel15.getText();
-        if(tipo.equals("%")){        
-        double total3 = (total * cantidad) * (descuento/1000);
-        tv.total = (total * cantidad) - total3;
-        }else{        
-        tv.total = (total * cantidad) - descuento;
-        }
-        Venta.dibujo.add(tv);
+        if (libros != null) {
+            try {
+                libros.titulo = jTextField1.getText();
+                int cantidad1 = Integer.parseInt(jTextField2.getText());
+                if (cantidad1 <= libros.cantidad) {
+                    libros.cantidad -= cantidad1;
+                    reTabla();
+                    JOptionPane.showMessageDialog(this, "Se modifico correctamente");
+
+                    //-------------------------------------------------------
+                    TablaVenta tv = new TablaVenta();
+                    tv.libro = jTextField1.getText();
+                    int cantidad = Integer.parseInt(jTextField2.getText());
+                    tv.cantidad = cantidad;
+                    double total = Double.parseDouble(jLabel9.getText());
+                    tv.total = total * cantidad;
+                    Venta.dibujo.add(tv);
+                 /*  if (jLabel12.getText().isEmpty()) {
+                        tv.total = total * cantidad;
+                        Venta.dibujo.add(tv);
+                    } else {
+                        double descuento = Double.parseDouble(jLabel12.getText());
+                        String tipo = jLabel15.getText();
+                        if (tipo.equals("%")) {
+                            double total3 = (total * cantidad) * (descuento / 1000);
+                            tv.total = (total * cantidad) - total3;
+                        } else {
+                            tv.total = (total * cantidad) - descuento;
+                        }
+                        Venta.dibujo.add(tv);
+                    }*/
+
+                    //-----------------------------------
+                    LibrosV l = new LibrosV();
+                    l.libro = jTextField1.getText();
+                    l.cantidad = cantidad;
+                    l.total = total;
+
+                    Venta.librosV.add(l);
+
+                    reTabla2();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No hay existencia");
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "No ingreso los datos correctamente");
             }
-        
-        //-----------------------------------
-        LibrosV l = new LibrosV();
-        l.libro = jTextField1.getText(); 
-        l.cantidad = cantidad;
-        l.total = total;
-        
-        Venta.librosV.add(l);
-        
-        reTabla2();
-        }else{
-            JOptionPane.showMessageDialog(this, "No hay existencia");
         }
-        
-    }catch(Exception e){
-        JOptionPane.showMessageDialog(this,"No ingreso los datos correctamente");  
-    }
-         }
-       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-   
-       Venta.dibujo.clear();
+
+        Venta.dibujo.clear();
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         String ñ = "";
-        int c=0;
-     double p=0;
-        for(int i=0;i < Venta.dibujo.size();i++){
+        int c = 0;
+        double p = 0;
+        for (int i = 0; i < Venta.dibujo.size(); i++) {
             TablaVenta r = Venta.dibujo.get(i);
-           c += r.cantidad;
-           p += r.total;
-           ñ +=" "+r.cantidad+" x "+ r.libro+"\n";
-     }
-            Venta v = new Venta();
+            c += r.cantidad;
+            p += r.total;
+            ñ += " " + r.cantidad + " x " + r.libro + "\n";
+        }
+        if (jLabel12.getText().isEmpty()) {
+                        jLabel17.setText(String.valueOf(p));
+                        uso = "No uso cupon";
+                    } else {
+                        double descuento = Double.parseDouble(jLabel12.getText());
+                        String tipo = jLabel15.getText();
+                        if (tipo.equals("%")) {
+                            double total3 = p * (descuento / 100);
+                            p = p - total3;
+                            jLabel17.setText(String.valueOf(p));
+                        } else {
+                            p = p - descuento;
+                             jLabel17.setText(String.valueOf(p)); 
+                        }
+                        
+                    }
+        uso = "-"+jLabel12.getText()+""+jLabel15.getText();
+        
+        
+        Venta v = new Venta();
         v.total = p;
-        v.iva = p/1.12;
+        v.iva = p / 1.12;
         v.nit = jTextField4.getText();
         v.nombre = jTextField5.getText();
         v.direccion = jTextField6.getText();
         v.vendedor = usuarioActual.nombre;
         LocalDateTime fechaHoraActual = LocalDateTime.now();
-         v.fechaHoraActual = fechaHoraActual;
+        v.fechaHoraActual = fechaHoraActual;
         Proyecto2.ventas.add(v);
-    
-           JOptionPane.showMessageDialog(this, "-------Factura-------"+"\n\n"+"Cantidad de libros: "+c+"\n"+"Libros: \n"+ñ+"\n"+ "Total: "+p);
-         Venta.dibujo.clear();
+
+        JOptionPane.showMessageDialog(this, "-------Factura-------" + "\n\n" + "Cantidad de libros: " + c + "\n" + "Libros: \n" + ñ + "\n" + "Total: " + p + "\n"+ "Cupon: " + uso);
+        Venta.dibujo.clear();
         reTabla2();
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-         if(jTable3.getSelectedRow()>=0){
-         cupones = Proyecto2.cupones.get(jTable3.getSelectedRow());
-        jLabel12.setText(String.valueOf(cupones.descuento));
-        String tipo1 = cupones.tipo;
-        if(tipo1.equals("porcentaje")){
-            jLabel15.setText("%");
-        }else{
-            jLabel15.setText("Q");
-        }
-        
-    }           
-              
-    }//GEN-LAST:event_jButton6ActionPerformed
+        if (jTable3.getSelectedRow() >= 0) {
+            cupones = Proyecto2.cupones.get(jTable3.getSelectedRow());
+            jLabel12.setText(String.valueOf(cupones.descuento));
+            String tipo1 = cupones.tipo;
+            if (tipo1.equals("porcentaje")) {
+                jLabel15.setText("%");
+            } else {
+                jLabel15.setText("Q");
+            }
 
+        }
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -533,6 +565,8 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
