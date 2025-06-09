@@ -4,6 +4,8 @@
  */
 package com.mycompany.proyecto2;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author oem
@@ -12,5 +14,6 @@ public class LibrosV {
       public String libro;
        public int cantidad ;
        public double total;
+       public LocalDateTime fechaHoraActual;
     
 }

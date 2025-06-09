@@ -464,8 +464,10 @@ public class Ventas extends javax.swing.JFrame {
                     LibrosV l = new LibrosV();
                     l.libro = jTextField1.getText();
                     l.cantidad = cantidad;
-                    l.total = total;
-
+                    l.total = total * cantidad;
+                    LocalDateTime fechaHoraActual = LocalDateTime.now();
+                    l.fechaHoraActual = fechaHoraActual;
+                    
                     Venta.librosV.add(l);
 
                     reTabla2();
@@ -506,13 +508,14 @@ public class Ventas extends javax.swing.JFrame {
                             double total3 = p * (descuento / 100);
                             p = p - total3;
                             jLabel17.setText(String.valueOf(p));
+                            uso = "-"+jLabel12.getText()+""+jLabel15.getText();
                         } else {
                             p = p - descuento;
                              jLabel17.setText(String.valueOf(p)); 
+                             uso = "-"+jLabel12.getText()+""+jLabel15.getText();
                         }
                         
                     }
-        uso = "-"+jLabel12.getText()+""+jLabel15.getText();
         
         
         Venta v = new Venta();
