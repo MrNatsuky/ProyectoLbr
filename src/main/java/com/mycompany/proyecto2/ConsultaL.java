@@ -37,17 +37,17 @@ public class ConsultaL extends javax.swing.JFrame {
 
     private void reTabla() {
         String encabezado[] = {"Titulo", "Autor", "Genero", "Precio", "Cantidad"};
-        DefaultTableModel t = new DefaultTableModel(encabezado, Proyecto2.libros.size());
+        DefaultTableModel t = new DefaultTableModel(encabezado, Programa.getLibros().size());
         jTable1.setModel(t);
         TableModel tabla = jTable1.getModel();
 
-        for (int i = 0; i < Proyecto2.libros.size(); i++) {
-            Libros l = Proyecto2.libros.get(i);
-            tabla.setValueAt(l.titulo, i, 0);
-            tabla.setValueAt(l.autor, i, 1);
-            tabla.setValueAt(l.genero, i, 2);
-            tabla.setValueAt(l.precio, i, 3);
-            tabla.setValueAt(l.cantidad, i, 4);
+        for (int i = 0; i < Programa.getLibros().size(); i++) {
+            Libros l = Programa.getLibros().get(i);
+            tabla.setValueAt(l.getTitulo(), i, 0);
+            tabla.setValueAt(l.getAutor(), i, 1);
+            tabla.setValueAt(l.getGenero(), i, 2);
+            tabla.setValueAt(l.getPrecio(), i, 3);
+            tabla.setValueAt(l.getCantidad(), i, 4);
         }
     }
 
@@ -297,14 +297,14 @@ public class ConsultaL extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (jTable1.getSelectedRow() >= 0) {
-            libros = Proyecto2.libros.get(jTable1.getSelectedRow());
+            libros = Programa.getLibros().get(jTable1.getSelectedRow());
 
-            jTextField1.setText(libros.autor);
-            jTextField2.setText(libros.titulo);
-            jTextField3.setText(libros.genero);
-            String precio = String.valueOf(libros.precio);
+            jTextField1.setText(libros.getAutor());
+            jTextField2.setText(libros.getTitulo());
+            jTextField3.setText(libros.getGenero());
+            String precio = String.valueOf(libros.getPrecio());
             jTextField4.setText(precio);
-            String cantidad = String.valueOf(libros.cantidad);
+            String cantidad = String.valueOf(libros.getCantidad());
             jTextField5.setText(cantidad);
 
         }
@@ -313,13 +313,13 @@ public class ConsultaL extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (libros != null) {
             try {
-                libros.autor = jTextField1.getText();
-                libros.titulo = jTextField2.getText();
-                libros.genero = jTextField3.getText();
+                libros.setAutor(jTextField1.getText());
+                libros.setTitulo(jTextField2.getText());
+                libros.setGenero(jTextField3.getText());
                 double precio = Double.parseDouble(jTextField4.getText());
-                libros.precio = precio;
+                libros.setPrecio(precio);
                 int cantidad = Integer.parseInt(jTextField5.getText());
-                libros.cantidad = cantidad;
+                libros.setCantidad(cantidad);
 
                 reTabla();
                 JOptionPane.showMessageDialog(this, "Se modifico correctamente");
@@ -333,7 +333,7 @@ public class ConsultaL extends javax.swing.JFrame {
         int eliminar = jTable1.getSelectedRow();
         if (eliminar >= 0) {
             if (JOptionPane.showConfirmDialog(this, "Esta seguro de eliminar este libro") == 0) {
-                Proyecto2.libros.remove(eliminar);
+                Programa.getLibros().remove(eliminar);
                 reTabla();
             }
         } else {
@@ -393,26 +393,26 @@ public class ConsultaL extends javax.swing.JFrame {
     private static void mostrarInformacionlibros(JSONObject jsonObject) {
         JSONObject libros = (JSONObject) jsonObject.get("libro");
         Libros l = new Libros();
-        l.titulo = (String) libros.get("titulo");
-        l.autor = (String) libros.get("autor");
-        l.genero = (String) libros.get("genero");
-        l.precio = (Double) libros.get("precio");
-        l.cantidad = ((Number) libros.get("cantidad")).intValue();
+        l.setTitulo((String) libros.get("titulo"));
+        l.setAutor((String) libros.get("autor"));
+        l.setGenero((String) libros.get("genero"));
+        l.setPrecio((double) (Double) libros.get("precio"));
+        l.setCantidad(((Number) libros.get("cantidad")).intValue());
 
-        Proyecto2.libros.add(l);
+        Programa.getLibros().add(l);
     }
 
     private static void guardar() {
       JSONArray listalibro = new JSONArray();  
       
-    for(int i = 0; i < Proyecto2.libros.size(); i++){
-        Libros l = Proyecto2.libros.get(i);
+    for(int i = 0; i < Programa.getLibros().size(); i++){
+        Libros l = Programa.getLibros().get(i);
     JSONObject libro = new JSONObject(); 
-    libro.put("titulo", l.titulo);
-    libro.put("autor", l.autor);
-    libro.put("precio", l.precio);
-    libro.put("cantidad", l.cantidad);
-    libro.put("genero", l.genero);
+    libro.put("titulo", l.getTitulo());
+    libro.put("autor", l.getAutor());
+    libro.put("precio", l.getPrecio());
+    libro.put("cantidad", l.getCantidad());
+    libro.put("genero", l.getGenero());
     
     JSONObject datospersona = new JSONObject();
     datospersona.put("libro", libro);

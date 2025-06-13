@@ -36,16 +36,16 @@ public class ConsultaC extends javax.swing.JFrame {
     }
     private void reTabla(){
            String encabezado[] = {"CodigoDescuento","ValorDescuento","Tipo","FechaVencimiento"};
-        DefaultTableModel t = new DefaultTableModel(encabezado,Proyecto2.cupones.size());
+        DefaultTableModel t = new DefaultTableModel(encabezado,Programa.getCupones().size());
         jTable1.setModel(t);
         TableModel tabla = jTable1.getModel();
        
-        for(int i=0;i<Proyecto2.cupones.size();i++){
-            Cupones c = Proyecto2.cupones.get(i);
-            tabla.setValueAt(c.codigo, i , 0);
-            tabla.setValueAt(c.descuento, i , 1);
-            tabla.setValueAt(c.tipo, i , 2);
-            tabla.setValueAt(c.fecha, i , 3);
+        for(int i=0;i<Programa.getCupones().size();i++){
+            Cupones c = Programa.getCupones().get(i);
+            tabla.setValueAt(c.getCodigo(), i , 0);
+            tabla.setValueAt(c.getDescuento(), i , 1);
+            tabla.setValueAt(c.getTipo(), i , 2);
+            tabla.setValueAt(c.getFecha(), i , 3);
                     }
     }
 
@@ -274,7 +274,7 @@ public class ConsultaC extends javax.swing.JFrame {
       int eliminar = jTable1.getSelectedRow();
       if(eliminar >= 0){
           if(JOptionPane.showConfirmDialog(this, "Esta seguro de borrar el cupon")==0){
-              Proyecto2.cupones.remove(eliminar);
+              Programa.getCupones().remove(eliminar);
               reTabla();
             }
           }else{
@@ -286,18 +286,18 @@ public class ConsultaC extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
     if(cupones !=null){
      try{
-     cupones.codigo=(jTextField1.getText());
+     cupones.setCodigo(jTextField1.getText());
      String descuento = jTextField2.getText();
-     cupones.descuento=(Double.parseDouble(descuento));
+     cupones.setDescuento(Double.parseDouble(descuento));
      
      String tipo = jComboBox1.getSelectedItem().toString();
      
      if(tipo.equals("Porcentaje")){
-         cupones.tipo=("porcentaje");
+         cupones.setTipo("porcentaje");
      }else{
-         cupones.tipo=("monto");
+         cupones.setTipo("monto");
      }
-     cupones.fecha=(jTextField3.getText());
+     cupones.setFecha(jTextField3.getText());
      reTabla();
      
      JOptionPane.showMessageDialog(this,"Se modifico correctamente");
@@ -316,12 +316,12 @@ public class ConsultaC extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if(jTable1.getSelectedRow()>=0){
-        cupones = Proyecto2.cupones.get(jTable1.getSelectedRow());
-       String descuentos = String.valueOf(cupones.descuento);
-        jTextField1.setText(cupones.codigo);
+        cupones = Programa.getCupones().get(jTable1.getSelectedRow());
+       String descuentos = String.valueOf(cupones.getDescuento());
+        jTextField1.setText(cupones.getCodigo());
         jTextField2.setText(descuentos);
-        jTextField3.setText(cupones.fecha);
-        if(cupones.tipo.equals("P")){
+        jTextField3.setText(cupones.getFecha());
+        if(cupones.getTipo().equals("P")){
             jComboBox1.setSelectedIndex(0);
         }else{
             jComboBox1.setSelectedIndex(1);
@@ -362,11 +362,11 @@ public class ConsultaC extends javax.swing.JFrame {
                 String arreglo [] = linea.split("\\|");
                 if(arreglo.length==4){
                     Cupones c = new Cupones();
-                    c.codigo=(arreglo[0]);
-                    c.descuento=(Double.parseDouble(arreglo[1]));
-                    c.tipo=(arreglo[2]);
-                    c.fecha=(arreglo[3]);
-                    Proyecto2.cupones.add(c);
+                    c.setCodigo(arreglo[0]);
+                    c.setDescuento(Double.parseDouble(arreglo[1]));
+                    c.setTipo(arreglo[2]);
+                    c.setFecha(arreglo[3]);
+                    Programa.getCupones().add(c);
                 }
             }
             reTabla();
@@ -407,8 +407,8 @@ public class ConsultaC extends javax.swing.JFrame {
             fichero = new FileWriter(archivo);
             pw = new PrintWriter(fichero);
             
-            for(Cupones c: Proyecto2.cupones){
-                String linea = c.codigo+"|"+c.descuento+"|"+c.tipo+"|"+c.fecha;
+            for(Cupones c: Programa.getCupones()){
+                String linea = c.getCodigo()+"|"+c.getDescuento()+"|"+c.getTipo()+"|"+c.getFecha();
                 pw.println(linea);
             }
         }catch(Exception ex){

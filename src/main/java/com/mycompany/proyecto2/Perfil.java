@@ -19,9 +19,9 @@ public class Perfil extends javax.swing.JFrame {
         initComponents();
         usuarioActual = usuario;
         this.setLocationRelativeTo(null);
-        jLabel5.setText(usuarioActual.usuario);
-        jTextField1.setText(usuarioActual.nombre);
-        jTextField2.setText(usuarioActual.password);
+        jLabel5.setText(usuarioActual.getUsuario());
+        jTextField1.setText(usuarioActual.getNombre());
+        jTextField2.setText(usuarioActual.getPassword());
          }
 
     /**
@@ -145,8 +145,8 @@ public class Perfil extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        usuarioActual.nombre = jTextField1.getText();
-        usuarioActual.password = jTextField2.getText();
+        usuarioActual.setNombre(jTextField1.getText());
+        usuarioActual.setPassword(jTextField2.getText());
         JOptionPane.showMessageDialog(this, "El usuario ah sido modificado correctamente");       
     }//GEN-LAST:event_jButton2ActionPerformed
 

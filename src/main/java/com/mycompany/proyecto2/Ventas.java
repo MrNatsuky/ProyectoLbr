@@ -35,12 +35,12 @@ public class Ventas extends javax.swing.JFrame {
 
     private void reTabla2() {
         String encabezado[] = {"Titulo", "Cantidad", "total"};
-        DefaultTableModel t = new DefaultTableModel(encabezado, Venta.dibujo.size());
+        DefaultTableModel t = new DefaultTableModel(encabezado, Venta.getDibujo().size());
         jTable2.setModel(t);
         TableModel tabla = jTable2.getModel();
 
-        for (int i = 0; i < Venta.dibujo.size(); i++) {
-            TablaVenta v = Venta.dibujo.get(i);
+        for (int i = 0; i < Venta.getDibujo().size(); i++) {
+            TablaVenta v = Venta.getDibujo().get(i);
             tabla.setValueAt(v.libro, i, 0);
             tabla.setValueAt(v.cantidad, i, 1);
             tabla.setValueAt(v.total, i, 2);
@@ -49,29 +49,29 @@ public class Ventas extends javax.swing.JFrame {
 
     private void reTabla() {
         String encabezado[] = {"Titulo", "Precio", "Cantidad"};
-        DefaultTableModel t = new DefaultTableModel(encabezado, Proyecto2.libros.size());
+        DefaultTableModel t = new DefaultTableModel(encabezado, Programa.getLibros().size());
         jTable1.setModel(t);
         TableModel tabla = jTable1.getModel();
 
-        for (int i = 0; i < Proyecto2.libros.size(); i++) {
-            Libros l = Proyecto2.libros.get(i);
-            tabla.setValueAt(l.titulo, i, 0);
-            tabla.setValueAt(l.precio, i, 1);
-            tabla.setValueAt(l.cantidad, i, 2);
+        for (int i = 0; i < Programa.getLibros().size(); i++) {
+            Libros l = Programa.getLibros().get(i);
+            tabla.setValueAt(l.getTitulo(), i, 0);
+            tabla.setValueAt(l.getPrecio(), i, 1);
+            tabla.setValueAt(l.getCantidad(), i, 2);
         }
     }
 
     private void reTabla3() {
         String encabezado[] = {"Codigo", "Descuento", "Tipo"};
-        DefaultTableModel t = new DefaultTableModel(encabezado, Proyecto2.cupones.size());
+        DefaultTableModel t = new DefaultTableModel(encabezado, Programa.getCupones().size());
         jTable3.setModel(t);
         TableModel tabla = jTable3.getModel();
 
-        for (int i = 0; i < Proyecto2.cupones.size(); i++) {
-            Cupones c = Proyecto2.cupones.get(i);
-            tabla.setValueAt(c.codigo, i, 0);
-            tabla.setValueAt(c.descuento, i, 1);
-            tabla.setValueAt(c.tipo, i, 2);
+        for (int i = 0; i < Programa.getCupones().size(); i++) {
+            Cupones c = Programa.getCupones().get(i);
+            tabla.setValueAt(c.getCodigo(), i, 0);
+            tabla.setValueAt(c.getDescuento(), i, 1);
+            tabla.setValueAt(c.getTipo(), i, 2);
         }
     }
 
@@ -408,9 +408,9 @@ public class Ventas extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (jTable1.getSelectedRow() >= 0) {
-            libros = Proyecto2.libros.get(jTable1.getSelectedRow());
-            jTextField1.setText(libros.titulo);
-            String precio1 = String.valueOf(libros.precio);
+            libros = Programa.getLibros().get(jTable1.getSelectedRow());
+            jTextField1.setText(libros.getTitulo());
+            String precio1 = String.valueOf(libros.getPrecio());
             jLabel9.setText(precio1);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -430,10 +430,10 @@ public class Ventas extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (libros != null) {
             try {
-                libros.titulo = jTextField1.getText();
+                libros.setTitulo(jTextField1.getText());
                 int cantidad1 = Integer.parseInt(jTextField2.getText());
-                if (cantidad1 <= libros.cantidad) {
-                    libros.cantidad -= cantidad1;
+                if (cantidad1 <= libros.getCantidad()) {
+                    libros.setCantidad(libros.getCantidad() - cantidad1);
                     reTabla();
                     JOptionPane.showMessageDialog(this, "Se modifico correctamente");
 
@@ -444,7 +444,7 @@ public class Ventas extends javax.swing.JFrame {
                     tv.cantidad = cantidad;
                     double total = Double.parseDouble(jLabel9.getText());
                     tv.total = total * cantidad;
-                    Venta.dibujo.add(tv);
+                    Venta.getDibujo().add(tv);
                  /*  if (jLabel12.getText().isEmpty()) {
                         tv.total = total * cantidad;
                         Venta.dibujo.add(tv);
@@ -468,7 +468,7 @@ public class Ventas extends javax.swing.JFrame {
                     LocalDateTime fechaHoraActual = LocalDateTime.now();
                     l.fechaHoraActual = fechaHoraActual;
                     
-                    Venta.librosV.add(l);
+                    Venta.getLibrosV().add(l);
 
                     reTabla2();
                 } else {
@@ -484,7 +484,7 @@ public class Ventas extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        Venta.dibujo.clear();
+        Venta.getDibujo().clear();
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -492,8 +492,8 @@ public class Ventas extends javax.swing.JFrame {
         String ñ = "";
         int c = 0;
         double p = 0;
-        for (int i = 0; i < Venta.dibujo.size(); i++) {
-            TablaVenta r = Venta.dibujo.get(i);
+        for (int i = 0; i < Venta.getDibujo().size(); i++) {
+            TablaVenta r = Venta.getDibujo().get(i);
             c += r.cantidad;
             p += r.total;
             ñ += " " + r.cantidad + " x " + r.libro + "\n";
@@ -519,27 +519,27 @@ public class Ventas extends javax.swing.JFrame {
         
         
         Venta v = new Venta();
-        v.total = p;
-        v.iva = p / 1.12;
-        v.nit = jTextField4.getText();
-        v.nombre = jTextField5.getText();
-        v.direccion = jTextField6.getText();
-        v.vendedor = usuarioActual.nombre;
+        v.setTotal(p);
+        v.setIva(p / 1.12);
+        v.setNit(jTextField4.getText());
+        v.setNombre(jTextField5.getText());
+        v.setDireccion(jTextField6.getText());
+        v.setVendedor(usuarioActual.getNombre());
         LocalDateTime fechaHoraActual = LocalDateTime.now();
-        v.fechaHoraActual = fechaHoraActual;
-        Proyecto2.ventas.add(v);
+        v.setFechaHoraActual(fechaHoraActual);
+        Programa.getVentas().add(v);
 
         JOptionPane.showMessageDialog(this, "-------Factura-------" + "\n\n" + "Cantidad de libros: " + c + "\n" + "Libros: \n" + ñ + "\n" + "Total: " + p + "\n"+ "Cupon: " + uso);
-        Venta.dibujo.clear();
+        Venta.getDibujo().clear();
         reTabla2();
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (jTable3.getSelectedRow() >= 0) {
-            cupones = Proyecto2.cupones.get(jTable3.getSelectedRow());
-            jLabel12.setText(String.valueOf(cupones.descuento));
-            String tipo1 = cupones.tipo;
+            cupones = Programa.getCupones().get(jTable3.getSelectedRow());
+            jLabel12.setText(String.valueOf(cupones.getDescuento()));
+            String tipo1 = cupones.getTipo();
             if (tipo1.equals("porcentaje")) {
                 jLabel15.setText("%");
             } else {

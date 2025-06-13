@@ -25,12 +25,12 @@ public class Telefonos extends javax.swing.JFrame {
     }
     private void reTabla(){
            String encabezado[] = {"Codigo","Numero"};
-        DefaultTableModel t = new DefaultTableModel(encabezado,usuarioActual.telefono.size());
+        DefaultTableModel t = new DefaultTableModel(encabezado,usuarioActual.getTelefono().size());
         jTable1.setModel(t);
         TableModel tabla = jTable1.getModel();
        
-        for(int i=0;i<usuarioActual.telefono.size();i++){
-            Telefono T = usuarioActual.telefono.get(i);
+        for(int i=0;i<usuarioActual.getTelefono().size();i++){
+            Telefono T = usuarioActual.getTelefono().get(i);
             tabla.setValueAt(T.codigo, i , 0);
             tabla.setValueAt(T.numero, i , 1);
                     }

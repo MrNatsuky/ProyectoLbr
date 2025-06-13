@@ -27,12 +27,12 @@ public class ConsultaVentaL extends javax.swing.JFrame {
     }
      private void reTabla() {
         String encabezado[] = {"Titulo", "Cantidad", "Total","Fecha"};
-        DefaultTableModel t = new DefaultTableModel(encabezado, Venta.librosV.size());
+        DefaultTableModel t = new DefaultTableModel(encabezado, Venta.getLibrosV().size());
         jTable1.setModel(t);
         TableModel tabla = jTable1.getModel();
 
-        for (int i = 0; i < Venta.librosV.size(); i++) {
-            LibrosV v = Venta.librosV.get(i);
+        for (int i = 0; i < Venta.getLibrosV().size(); i++) {
+            LibrosV v = Venta.getLibrosV().get(i);
             tabla.setValueAt(v.libro, i, 0);
             tabla.setValueAt(v.cantidad, i, 1);
             tabla.setValueAt(v.total, i, 2);
@@ -159,7 +159,7 @@ public class ConsultaVentaL extends javax.swing.JFrame {
             fichero = new FileWriter(archivo);
             pw = new PrintWriter(fichero);
             
-            for(LibrosV l: Venta.librosV){
+            for(LibrosV l: Venta.getLibrosV()){
             String linea = l.libro+","+l.cantidad+","+l.total+","+l.fechaHoraActual;
             pw.println(linea);
             }

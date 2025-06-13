@@ -176,19 +176,19 @@ public class AgregarL extends javax.swing.JFrame {
         Libros l = new Libros();
         String p,c;
         try{
-        l.titulo = jTextField1.getText();
-        l.autor = jTextField2.getText();
-        l.genero = jTextField3.getText();
+        l.setTitulo(jTextField1.getText());
+        l.setAutor(jTextField2.getText());
+        l.setGenero(jTextField3.getText());
         p = jTextField4.getText();
         c = jTextField5.getText();
         
         double precio1 = Double.parseDouble(p);
         int cantidad1 = Integer.parseInt(c);
         
-        l.precio = precio1;
-        l.cantidad = cantidad1;
+        l.setPrecio(precio1);
+        l.setCantidad(cantidad1);
 
-        Proyecto2.libros.add(l);
+        Programa.getLibros().add(l);
         
       JOptionPane.showMessageDialog(this, "Se ingreso correctamente");
         }catch(Exception e){

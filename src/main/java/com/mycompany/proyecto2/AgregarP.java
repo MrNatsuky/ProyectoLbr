@@ -155,12 +155,12 @@ public class AgregarP extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     Proveedores P = new Proveedores();
     try{
-    P.nit = jTextField1.getText();
-    P.direccion = jTextField2.getText();
-    P.telefono = jTextField3.getText();
-    P.nombre = jTextField4.getText();
+    P.setNit(jTextField1.getText());
+    P.setDireccion(jTextField2.getText());
+    P.setTelefono(jTextField3.getText());
+    P.setNombre(jTextField4.getText());
     
-    Proyecto2.proveedor.add(P);
+    Programa.getProveedor().add(P);
     JOptionPane.showMessageDialog(this, "Se añadio Correctamente");
     }catch(Exception e){
     JOptionPane.showMessageDialog(this, "No ingreso los datos correctamente"); 

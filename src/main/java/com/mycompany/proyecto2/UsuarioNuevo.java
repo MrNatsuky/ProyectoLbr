@@ -163,20 +163,20 @@ public class UsuarioNuevo extends javax.swing.JFrame {
       boolean x = false;
       boolean z = false;
       
-      u.nombre = jTextField1.getText();
-      u.usuario = jTextField2.getText();
-      u.password = jTextField3.getText();
+      u.setNombre(jTextField1.getText());
+      u.setUsuario(jTextField2.getText());
+      u.setPassword(jTextField3.getText());
       
       String rol = jComboBox1.getSelectedItem().toString();
       if(rol.equals("Administrador")){
-          u.rol = "A";
+          u.setRol("A");
       }else{
-          u.rol = "V";
+          u.setRol("V");
                   }
       
-     if(u.password.length() > 6){
-      for(int i =0;i < u.password.length();i++){
-      char caracter = u.password.charAt(i);
+     if(u.getPassword().length() > 6){
+      for(int i =0;i < u.getPassword().length();i++){
+      char caracter = u.getPassword().charAt(i);
       
       if(Character.isUpperCase(caracter)){
        x = true;
@@ -190,7 +190,7 @@ public class UsuarioNuevo extends javax.swing.JFrame {
       }
       }
       if(x && z){
-     Proyecto2.usuarios.add(u);
+     Programa.getUsuarios().add(u);
      JOptionPane.showMessageDialog(this, "Se ingresaron los datos correctamente");
       }else{
     JOptionPane.showMessageDialog(this, "La contraseña debe de tener una Mayuscula y un numero como minimo");  

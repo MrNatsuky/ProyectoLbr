@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyecto2;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +19,7 @@ public class AgregarC extends javax.swing.JFrame {
     public AgregarC() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
         jComboBox1.removeAllItems();
         jComboBox1.addItem("Porcentaje");
         jComboBox1.addItem("Monto");
@@ -175,29 +176,31 @@ public class AgregarC extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     Cupones c = new Cupones();
-    try{ 
-    String descuento = jTextField2.getText(); 
-    c.codigo=(jTextField1.getText());
-    c.descuento=(Double.parseDouble(descuento));
-    c.fecha=(jTextField3.getText());
-    
-    String tipo = jComboBox1.getSelectedItem().toString();
-      if(tipo.equals("Porcentaje")){
-          c.tipo=("porcentaje");
-      }else{
-          c.tipo=("monto");
-                  }
-    Proyecto2.cupones.add(c);
-    JOptionPane.showMessageDialog(this, "Se Agrego correctamente");
-  
-    }catch(Exception e){
-    JOptionPane.showMessageDialog(this, "No ingreso los datos correctamente");    
-    }
+        Cupones c = new Cupones();
+        try {
+            String descuento = jTextField2.getText();
+            c.setCodigo(jTextField1.getText());
+            c.setDescuento(Double.parseDouble(descuento));
+            c.setFecha(jTextField3.getText());
+
+            String tipo = jComboBox1.getSelectedItem().toString();
+            if (tipo.equals("Porcentaje")) {
+                c.setTipo("porcentaje");
+            } else {
+                c.setTipo("monto");
+            }
+            
+            Programa.getCupones().add(c);
+            
+            JOptionPane.showMessageDialog(this, "Se Agrego correctamente");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No ingreso los datos correctamente");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

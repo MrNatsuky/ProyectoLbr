@@ -29,19 +29,19 @@ public class ConsultaV extends javax.swing.JFrame {
     }
       private void reTabla(){
         String encabezado[] = {"nombre","Nit","Direccion","Total","Total sin IVA","Vendedor","Fecha"};
-        DefaultTableModel t = new DefaultTableModel(encabezado,Proyecto2.ventas.size());
+        DefaultTableModel t = new DefaultTableModel(encabezado,Programa.getVentas().size());
         jTable1.setModel(t);
         TableModel tabla = jTable1.getModel();
         
-        for(int i=0;i < Proyecto2.ventas.size();i++){
-            Venta v = Proyecto2.ventas.get(i);
-            tabla.setValueAt(v.total, i, 3);
-            tabla.setValueAt(v.iva, i, 4);
-            tabla.setValueAt(v.nit, i, 1);
-            tabla.setValueAt(v.nombre, i, 0);
-            tabla.setValueAt(v.direccion, i, 2);
-            tabla.setValueAt(v.vendedor, i, 5);
-            tabla.setValueAt(v.fechaHoraActual, i, 6);
+        for(int i=0;i < Programa.getVentas().size();i++){
+            Venta v = Programa.getVentas().get(i);
+            tabla.setValueAt(v.getTotal(), i, 3);
+            tabla.setValueAt(v.getIva(), i, 4);
+            tabla.setValueAt(v.getNit(), i, 1);
+            tabla.setValueAt(v.getNombre(), i, 0);
+            tabla.setValueAt(v.getDireccion(), i, 2);
+            tabla.setValueAt(v.getVendedor(), i, 5);
+            tabla.setValueAt(v.getFechaHoraActual(), i, 6);
         }
    }
 
@@ -161,8 +161,8 @@ public class ConsultaV extends javax.swing.JFrame {
             fichero = new FileWriter(archivo);
             pw = new PrintWriter(fichero);
             
-            for(Venta v: Proyecto2.ventas){
-                String linea = v.nombre+","+v.nit+","+v.direccion+","+v.total+","+v.iva+","+v.vendedor+","+v.fechaHoraActual;
+            for(Venta v: Programa.getVentas()){
+                String linea = v.getNombre()+","+v.getNit()+","+v.getDireccion()+","+v.getTotal()+","+v.getIva()+","+v.getVendedor()+","+v.getFechaHoraActual();
                 pw.println(linea);
             }
         }catch(Exception ex){

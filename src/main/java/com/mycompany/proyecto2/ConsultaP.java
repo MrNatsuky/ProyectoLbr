@@ -24,16 +24,16 @@ public Proveedores proveedor;
     }
      private void reTabla(){
         String encabezado[] = {"Nit","Direccion","Telefono","Nombre"};
-        DefaultTableModel t = new DefaultTableModel(encabezado,Proyecto2.proveedor.size());
+        DefaultTableModel t = new DefaultTableModel(encabezado,Programa.getProveedor().size());
         jTable1.setModel(t);
         TableModel tabla = jTable1.getModel();
         
-        for(int i=0;i < Proyecto2.proveedor.size();i++){
-            Proveedores l = Proyecto2.proveedor.get(i);
-            tabla.setValueAt(l.nit, i, 0);
-            tabla.setValueAt(l.direccion, i, 1);
-            tabla.setValueAt(l.telefono, i, 2);
-            tabla.setValueAt(l.nombre, i, 3);
+        for(int i=0;i < Programa.getProveedor().size();i++){
+            Proveedores l = Programa.getProveedor().get(i);
+            tabla.setValueAt(l.getNit(), i, 0);
+            tabla.setValueAt(l.getDireccion(), i, 1);
+            tabla.setValueAt(l.getTelefono(), i, 2);
+            tabla.setValueAt(l.getNombre(), i, 3);
         }
      }
 
@@ -232,13 +232,13 @@ public Proveedores proveedor;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          if(jTable1.getSelectedRow()>=0){
-         proveedor= Proyecto2.proveedor.get(jTable1.getSelectedRow());
+         proveedor= Programa.getProveedor().get(jTable1.getSelectedRow());
          
-         jTextField1.setText(proveedor.nit);
-         jTextField2.setText(proveedor.direccion);
-         jTextField3.setText(proveedor.telefono);
+         jTextField1.setText(proveedor.getNit());
+         jTextField2.setText(proveedor.getDireccion());
+         jTextField3.setText(proveedor.getTelefono());
         
-         jTextField4.setText(proveedor.nombre);
+         jTextField4.setText(proveedor.getNombre());
          
          
         }
@@ -247,10 +247,10 @@ public Proveedores proveedor;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
      if(proveedor !=null){
          try{
-        proveedor.nit = jTextField1.getText();
-        proveedor.direccion = jTextField2.getText();
-        proveedor.telefono = jTextField3.getText();
-        proveedor.nombre = jTextField4.getText();
+        proveedor.setNit(jTextField1.getText());
+        proveedor.setDireccion(jTextField2.getText());
+        proveedor.setTelefono(jTextField3.getText());
+        proveedor.setNombre(jTextField4.getText());
         
         
         reTabla();
@@ -265,7 +265,7 @@ public Proveedores proveedor;
   int eliminar = jTable1.getSelectedRow();
      if(eliminar >=0){
          if(JOptionPane.showConfirmDialog(this, "Esta seguro de eliminar este libro")==0){
-           Proyecto2.proveedor.remove(eliminar);
+           Programa.getProveedor().remove(eliminar);
            reTabla();
          }
      }else{

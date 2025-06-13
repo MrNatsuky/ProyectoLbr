@@ -137,7 +137,7 @@ public class AgregarT extends javax.swing.JFrame {
      try{
      t.codigo = jTextField1.getText();
      t.numero = jTextField2.getText();
-     usuarioActual.telefono.add(t);
+     usuarioActual.getTelefono().add(t);
      JOptionPane.showMessageDialog(this, "Telefono agregado correctamente");
      }catch(Exception e){
      JOptionPane.showMessageDialog(this, "No ingreso los datos correctamente"); 

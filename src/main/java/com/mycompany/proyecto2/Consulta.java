@@ -43,16 +43,16 @@ private Usuario usuario;
     private void reTabla(){
          
         String encabezado[] = {"Nombre","Usuario","Password","Rol"};
-        DefaultTableModel t = new DefaultTableModel(encabezado,Proyecto2.usuarios.size());
+        DefaultTableModel t = new DefaultTableModel(encabezado,Programa.getUsuarios().size());
          jTable1.setModel(t);
         TableModel tabla = jTable1.getModel();
         
-        for(int i = 0; i < Proyecto2.usuarios.size();i++){
-            Usuario u = Proyecto2.usuarios.get(i);
-            tabla.setValueAt(u.nombre, i, 0);
-            tabla.setValueAt(u.usuario, i, 1);
-            tabla.setValueAt(u.password, i, 2);
-            tabla.setValueAt(u.rol, i, 3);
+        for(int i = 0; i < Programa.getUsuarios().size();i++){
+            Usuario u = Programa.getUsuarios().get(i);
+            tabla.setValueAt(u.getNombre(), i, 0);
+            tabla.setValueAt(u.getUsuario(), i, 1);
+            tabla.setValueAt(u.getPassword(), i, 2);
+            tabla.setValueAt(u.getRol(), i, 3);
             
         }
     }
@@ -279,7 +279,7 @@ private Usuario usuario;
     int eliminar = jTable1.getSelectedRow();
     if(eliminar > 0){
       if(JOptionPane.showConfirmDialog(this, "Esta seguro de borrar este usuario")==0){
-         Proyecto2.usuarios.remove(eliminar);
+         Programa.getUsuarios().remove(eliminar);
         reTabla();
         }
     }else{
@@ -292,17 +292,17 @@ private Usuario usuario;
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
       if(usuario !=null){
        try{
-        usuario.nombre =jTextField1.getText();
-        usuario.password =jTextField3.getText();
+        usuario.setNombre(jTextField1.getText());
+        usuario.setPassword(jTextField3.getText());
         
         String rol = jComboBox1.getSelectedItem().toString();
         
         if(rol.equals("Administrador")){
-            usuario.rol = "A";
+            usuario.setRol("A");
         }else{
-            usuario.rol = "V";
+            usuario.setRol("V");
         }
-        usuario.usuario = jTextField2.getText();
+        usuario.setUsuario(jTextField2.getText());
         reTabla();
         
         JOptionPane.showMessageDialog(this,"Se modifico correctamente");
@@ -314,12 +314,12 @@ private Usuario usuario;
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
     if(jTable1.getSelectedRow()>=0){    
-        usuario = Proyecto2.usuarios.get(jTable1.getSelectedRow());
+        usuario = Programa.getUsuarios().get(jTable1.getSelectedRow());
         
-        jTextField1.setText(usuario.nombre);
-        jTextField3.setText(usuario.password);
-        jTextField2.setText(usuario.usuario);
-        if(usuario.rol.equals("A")){
+        jTextField1.setText(usuario.getNombre());
+        jTextField3.setText(usuario.getPassword());
+        jTextField2.setText(usuario.getUsuario());
+        if(usuario.getRol().equals("A")){
             jComboBox1.setSelectedIndex(0);
         }else{
             jComboBox1.setSelectedIndex(1);
@@ -366,17 +366,17 @@ private Usuario usuario;
             
             pw.println("<usuarios>");
             
-            for(Usuario u : Proyecto2.usuarios){
+            for(Usuario u : Programa.getUsuarios()){
                 
                 pw.println("    "+"<usuario>");
                     
-                    pw.println("        "+"<nombre>"+u.nombre+"</nombre>");
+                    pw.println("        "+"<nombre>"+u.getNombre()+"</nombre>");
                 
-                    pw.println("        "+"<usuario1>"+u.usuario+"</usuario1>");
+                    pw.println("        "+"<usuario1>"+u.getUsuario()+"</usuario1>");
                     
-                    pw.println("        "+"<contraseña>"+u.password+"</contraseña>");
+                    pw.println("        "+"<contraseña>"+u.getPassword()+"</contraseña>");
                     
-                    pw.println("        "+"<rol>"+u.rol+"</rol>");
+                    pw.println("        "+"<rol>"+u.getRol()+"</rol>");
                 pw.println("    "+"</usuario>");
             }
             
@@ -411,16 +411,16 @@ private Usuario usuario;
             if(nodo.getNodeType() == Node.ELEMENT_NODE){
                 Element elemento = (Element) nodo;
                 Usuario u = new Usuario();
-                u.nombre = elemento.getElementsByTagName("nombre").item(0).getTextContent();
-                u.usuario = elemento.getElementsByTagName("usuario1").item(0).getTextContent();
-                u.password = elemento.getElementsByTagName("contraseña").item(0).getTextContent();
+                u.setNombre(elemento.getElementsByTagName("nombre").item(0).getTextContent());
+                u.setUsuario(elemento.getElementsByTagName("usuario1").item(0).getTextContent());
+                u.setPassword(elemento.getElementsByTagName("contraseña").item(0).getTextContent());
                 String rol1 = elemento.getElementsByTagName("rol").item(0).getTextContent();
                 if(rol1.equals("Administrador")){
-                u.rol = "A";  
+                u.setRol("A");  
                 }else{
-                u.rol = "V";    
+                u.setRol("V");    
                 }
-                Proyecto2.usuarios.add(u);
+                Programa.getUsuarios().add(u);
             }
             
         }
